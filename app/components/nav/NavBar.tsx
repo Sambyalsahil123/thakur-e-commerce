@@ -4,6 +4,7 @@ import Container from "../Container";
 import Link from "next/link";
 import { Redressed } from "next/font/google";
 import Image from "next/image";
+import CartCount from "./CartCount";
 const redressed = Redressed({ subsets: ["latin"], weight: ["400"] });
 
 const NavBar = () => {
@@ -42,13 +43,12 @@ const NavBar = () => {
             >
               <div className="flex text-center justify-center items-center">
                 <Image alt="logo" src="/logo2.png" height={10} width={50} />
-              
                 Thakur E-Kart
               </div>
             </Link>
             <div className="hidden md:block">Search</div>
             <div className="flex items-center gap-8 md:gap-12">
-              <div>CartCount</div>
+              <CartCount />
               <div>usermenu</div>
             </div>
           </div>

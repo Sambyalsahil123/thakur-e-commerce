@@ -1,7 +1,7 @@
 import React from "react";
 import { IconType } from "react-icons";
 interface ButtonProps {
-  label: string;
+  label: string | React.ReactNode;
   disabled?: boolean;
   outline?: boolean;
   small?: boolean;
@@ -20,6 +20,7 @@ const Button: React.FC<ButtonProps> = ({
 }) => {
   return (
     <button
+      onClick={onClick}
       disabled={disabled}
       className={`
       disabled:opacity-70 
