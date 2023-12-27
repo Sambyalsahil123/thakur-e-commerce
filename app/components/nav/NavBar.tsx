@@ -1,38 +1,19 @@
-"use client";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Container from "../Container";
 import Link from "next/link";
 import { Redressed } from "next/font/google";
 import Image from "next/image";
 import CartCount from "./CartCount";
+import UserMenu from "./UserMenu";
+import { getCurrentUser } from "@/actions/getCurrentUser";
 const redressed = Redressed({ subsets: ["latin"], weight: ["400"] });
 
-const NavBar = () => {
-  const [show, setShow] = useState("translate-y-0");
-  const [lastScrollY, setLastScrollY] = useState(0);
-  const controlNavbar = () => {
-    if (window.scrollY > 200) {
-      if (window.scrollY > lastScrollY) {
-        setShow("-translate-y-[80px]");
-      } else {
-        setShow("shadow-sm");
-      }
-    } else {
-      setShow("translate-y-0");
-    }
-    setLastScrollY(window.scrollY);
-  };
-
-  useEffect(() => {
-    window.addEventListener("scroll", controlNavbar);
-    return () => {
-      window.removeEventListener("scroll", controlNavbar);
-    };
-  }, [lastScrollY]);
+const NavBar = async () => {
+  const currentUser = await getCurrentUser();
 
   return (
     <div
-      className={`sticky top-0 w-full bg-slate-200 z-30 shadow-sm transition-transform duration-300 ${show}`}
+      className={`sticky top-0 w-full bg-slate-200 z-30 shadow-sm transition-transform duration-300 `}
     >
       <div className="py-4 border-b-[1px]">
         <Container>
@@ -49,7 +30,7 @@ const NavBar = () => {
             <div className="hidden md:block">Search</div>
             <div className="flex items-center gap-8 md:gap-12">
               <CartCount />
-              <div>usermenu</div>
+              <UserMenu currentUser={currentUser} />
             </div>
           </div>
         </Container>

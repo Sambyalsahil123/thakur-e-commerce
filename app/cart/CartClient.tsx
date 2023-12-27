@@ -69,11 +69,7 @@ const CartClient = () => {
           <p className="text-slate-500">
             Taxes and shipping calculate at checkout
           </p>
-          <Button
-            disabled={true}
-            label={true ? <img src="/spinner.svg" /> : "Checkout"}
-            onClick={() => {}} 
-          />
+          <Button label="Checkout" onClick={() => {}} />
           <Link
             href={"/"}
             className="to-slate-500 flex items-center gap-1 mt-2"

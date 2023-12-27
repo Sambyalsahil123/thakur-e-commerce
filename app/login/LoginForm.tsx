@@ -1,5 +1,4 @@
 "use client";
-
 import { useEffect, useState } from "react";
 import Heading from "../components/Heading";
 import Input from "../components/inputs/Input";
@@ -7,17 +6,17 @@ import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import Button from "../components/Button";
 import Link from "next/link";
 import { AiOutlineGoogle } from "react-icons/ai";
-import axios from "axios";
-import { signIn } from "next-auth/react";
-import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
+import { signIn } from "next-auth/react";
 import { SafeUser } from "@/types";
 
-interface RegisterFormProps {
+interface LoginFormProps {
   currentUser: SafeUser | null;
 }
-const RegisterForm: React.FC<RegisterFormProps> = ({ currentUser }) => {
+const LoginForm: React.FC<LoginFormProps> = ({ currentUser }) => {
   const router = useRouter();
+
   const [isLoading, setIsLoading] = useState(false);
   const {
     register,
@@ -25,7 +24,6 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ currentUser }) => {
     formState: { errors },
   } = useForm<FieldValues>({
     defaultValues: {
-      name: "",
       email: "",
       password: "",
     },
@@ -39,34 +37,27 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ currentUser }) => {
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     setIsLoading(true);
-    axios
-      .post("/api/register", data)
-      .then(() => {
-        toast.success("Account created");
-        signIn("credentials", {
-          email: data.email,
-          password: data.password,
-          redirect: false,
-        }).then((callback) => {
-          if (callback?.ok) {
-            router.push("/cart");
-            router.refresh();
-            toast.success("Logged In");
-          }
-          if (callback?.error) {
-            toast.error(callback?.error);
-          }
-        });
-      })
-      .catch(() => toast.error("Something went worng"))
-      .finally(() => setIsLoading(false));
+    signIn("credentials", {
+      ...data,
+      redirect: false,
+    }).then((callback) => {
+      setIsLoading(false);
+      if (callback?.ok) {
+        router.push("/cart");
+        router.refresh();
+        toast.success("Logged In");
+      }
+      if (callback?.error) {
+        toast.error(callback?.error);
+      }
+    });
   };
   if (currentUser) {
     return <p className="text-center">Logged in. Redirecting</p>;
   }
   return (
     <>
-      <Heading title="Sign up for E-shop " />
+      <Heading title="Sign in to E-shop " />
       <Button
         outline
         label="Continue with Google"
@@ -76,14 +67,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ currentUser }) => {
         }}
       />
       <hr className="bg-slate-300 w-full h-px" />
-      <Input
-        id="name"
-        label="Name"
-        disabled={isLoading}
-        register={register}
-        errors={errors}
-        required
-      />
+
       <Input
         id="email"
         label="Email"
@@ -103,17 +87,17 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ currentUser }) => {
       />
       <Button
         disabled={!!isLoading}
-        label={isLoading ? <img src="/spinner.svg" /> : "Sign Up"}
+        label={isLoading ? <img src="/spinner.svg" /> : "Login"}
         onClick={handleSubmit(onSubmit)}
       />
       <p className="text-sm">
-        Already have an account?{" "}
-        <Link className="underline" href={"/login"}>
-          Login
+        Do not have an account?
+        <Link className="underline" href={"/register"}>
+          Sign up
         </Link>
       </p>
     </>
   );
 };
 
-export default RegisterForm;
+export default LoginForm;
