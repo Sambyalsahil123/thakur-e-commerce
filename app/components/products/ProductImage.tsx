@@ -32,7 +32,7 @@ const ProductImage: React.FC<ProductImageProps> = ({
             >
               <Image
                 src={image.image}
-                alt={image.color} 
+                alt={image.color}
                 fill
                 className="object-contain"
               />

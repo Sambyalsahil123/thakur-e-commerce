@@ -18,6 +18,8 @@ type CartContextType = {
   handleQtyIncrease: (product: CartProductType) => void;
   handleQtyDecrease: (product: CartProductType) => void;
   handleClearCart: () => void;
+  paymentIntent: string | null;
+  handleSetPaymentIntent: (val: string | null) => void;
 };
 
 // CartContext
@@ -31,6 +33,7 @@ export const CartContextProvider = (props: Props) => {
   const [cartTotalAmount, setCartTotalAmount] = useState(0);
   const [cartTotalQty, setCartTotalQty] = useState(0);
   const [loading, setLoading] = useState(false);
+  const [paymentIntent, setPaymentIntent] = useState<string | null>(null);
   const [cartProducts, setCartProducts] = useState<CartProductType[] | null>(
     null
   );
@@ -38,23 +41,25 @@ export const CartContextProvider = (props: Props) => {
   useEffect(() => {
     const cartItems: any = localStorage.getItem("eShopCartItems");
     const underCartProduct: CartProductType[] | null = JSON.parse(cartItems);
+    const eShopPaymentIntent: any = localStorage.getItem("eShopPaymentIntent");
+    const paymentIntent: string | null = JSON.parse(eShopPaymentIntent);
     setCartProducts(underCartProduct);
+    setPaymentIntent(paymentIntent);
   }, []);
   useEffect(() => {
     const getTotals = () => {
       if (cartProducts) {
-        const { total, qty } = cartProducts?.reduce(
-          (accu, item) => {
-            const itemTotal = item.price * item.quantity;
-            accu.total += itemTotal;
-            accu.qty = item.quantity;
-            return accu;
+        const totals = cartProducts.reduce(
+          (acc, item) => {
+            acc.total += item.price * item.quantity;
+            acc.qty += item.quantity;
+            return acc;
           },
           { total: 0, qty: 0 }
         );
 
-        setCartTotalQty(qty);
-        setCartTotalAmount(qty);
+        setCartTotalQty(totals.qty);
+        setCartTotalAmount(totals.total);
       }
     };
     getTotals();
@@ -71,7 +76,7 @@ export const CartContextProvider = (props: Props) => {
         updatedCart = [product];
       }
       localStorage.setItem("eShopCartItems", JSON.stringify(updatedCart));
-      setLoading(false)
+      setLoading(false);
       return updatedCart;
     });
   }, []);
@@ -89,7 +94,6 @@ export const CartContextProvider = (props: Props) => {
         localStorage.setItem("eShopCartItems", JSON.stringify(filteredProduct));
         setLoading(false);
       }
-
     },
     [cartProducts]
   );
@@ -139,6 +143,14 @@ export const CartContextProvider = (props: Props) => {
     localStorage.setItem("eShopCartItems", JSON.stringify(null));
   }, [cartProducts]);
 
+  const handleSetPaymentIntent = useCallback(
+    (val: string | null) => {
+      setPaymentIntent(val);
+      localStorage.setItem("eShopPaymentIntent", JSON.stringify(val));
+    },
+    [paymentIntent]
+  );
+
   const value = {
     loading,
     cartTotalQty,
@@ -149,6 +161,8 @@ export const CartContextProvider = (props: Props) => {
     handleQtyIncrease,
     handleQtyDecrease,
     handleClearCart,
+    handleSetPaymentIntent,
+    paymentIntent,
   };
   return <CartContext.Provider value={value} {...props} />;
 };

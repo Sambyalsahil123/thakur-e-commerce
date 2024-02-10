@@ -1,50 +1,54 @@
 export const products = [
   {
-    id: "64a654593e91b8e73a351e9b",
-    name: "iphone 14",
-    description: "Short description",
-    price: 2999,
-    brand: "apple",
+    id: "64b2b8e3d9e8b5e4a93d1234",
+    name: "Samsung Galaxy S22",
+    description: "Experience the next generation of Galaxy",
+    price: 100,
+    brand: "Samsung",
     category: "Phone",
     inStock: true,
     images: [
       {
-        color: "White",
-        colorCode: "#FFFFFF",
+        color: "Phantom Black",
+        colorCode: "#000000",
         image:
-          "https://firebasestorage.googleapis.com/v0/b/e-shop-vid.appspot.com/o/products%2F1694245643713-iphone14-white.png?alt=media&token=2486cd23-8aa9-449e-8563-8c8a3278d0b4",
+          "https://mobileshop.ug/api/uploads/1700042656083-24dc16b8c32095357b27fbd8c8841e569849f83c.webp",
       },
       {
-        color: "Gray",
-        colorCode: "#808080",
+        color: "Sky Blue",
+        colorCode: "#87CEEB",
         image:
-          "https://firebasestorage.googleapis.com/v0/b/e-shop-vid.appspot.com/o/products%2F1694245647731-iphone14-gray.png?alt=media&token=ba0019e0-a6cb-4da7-b214-6252bf57f7e3",
+          "https://mobileshop.ug/api/uploads/1700042656132-f087d6e9a14bf8fed3791b8e8d62641523edee2f.webp",
       },
     ],
     reviews: [],
   },
   {
-    id: "64a4ebe300900d44bb50628a",
-    name: "Logitech MX Keys Advanced Wireless Illuminated Keyboard, Tactile Responsive Typing, Backlighting, Bluetooth, USB-C, Apple macOS, Microsoft Windows, Linux, iOS, Android, Metal Build (Black)",
+    id: "64b2c7f1e2f9a8e4b83f4567",
+    name: "IPHONE 15 PRO 256GB ROM 8GB RAM 3274mAh BATTERY",
     description:
-      "PERFECT STROKE KEYS - Spherically-dished keys match the shape of your fingertips, offering satisfying feedback with every tap\nCOMFORT AND STABILITY - Type with confidence on a keyboard crafted for comfort, stability, and precision",
-    price: 102.99,
-    brand: "logitech",
-    category: "Accesories",
+      "Industry-leading noise cancellation headphones with Dual Noise Sensor technology",
+    price: 200,
+    brand: "Sony",
+    category: "Accessories",
     inStock: true,
     images: [
       {
         color: "Black",
         colorCode: "#000000",
-        image:
-          "https://firebasestorage.googleapis.com/v0/b/e-shop-vid.appspot.com/o/products%2Flogitech-graphite.png?alt=media&token=d07334d8-ab2b-4648-a38b-2a062a1a49bc",
+        image: "https://mobileshop.ug/api/uploads/1696835619930-BLUE3.webp",
+      },
+      {
+        color: "Silver",
+        colorCode: "#C0C0C0",
+        image: "https://mobileshop.ug/api/uploads/1696835619930-BLUE3.webp",
       },
     ],
     reviews: [
       {
         id: "64a65a6158b470c6e06959ee",
         userId: "6475af156bad4917456e6e1e",
-        productId: "64a4ebe300900d44bb50628a",
+        productId: "64b2c7f1e2f9a8e4b83f4567",
         rating: 5,
         comment: "good",
         createdDate: "2023-07-06T06:08:33.067Z",
@@ -64,39 +68,25 @@ export const products = [
     ],
   },
   {
-    id: "648437b38c44d52b9542e340",
-    name: "Apple iPhone 12, 64GB",
-    description:
-      'The product is refurbished, fully functional, and in excellent condition. Backed by the 90-day E~Shop Renewed Guarantee.\n- This pre-owned product has been professionally inspected, tested and cleaned by Amazon qualified vendors. It is not certified by Apple.\n- This product is in "Excellent condition". The screen and body show no signs of cosmetic damage visible from 12 inches away.\n- This product will have a battery that exceeds 80% capacity relative to new.\n- Accessories may not be original, but will be compatible and fully functional. Product may come in generic box.\n- Product will come with a SIM removal tool, a charger and a charging cable. Headphone and SIM card are not included.\n- This product is eligible for a replacement or refund within 90-day of receipt if it does not work as expected.\n- Refurbished phones are not guaranteed to be waterproof.',
-    price: 40,
-    brand: "Apple",
-    category: "Phone",
+    id: "64b2d8e4f1g2h3i4j5k6l789",
+    name: "IPHONE 12 PRO MAX 128GB ROM 6GB RAM 3687mAh",
+    description: "Powerful performance, stunning display in a sleek, slim body",
+    price: 300,
+    brand: "Dell",
+    category: "Laptop",
     inStock: true,
     images: [
       {
-        color: "Black",
-        colorCode: "#000000",
-        image:
-          "https://firebasestorage.googleapis.com/v0/b/e-shop-vid.appspot.com/o/products%2Fiphone%2012%20black.png?alt=media&token=8fe19551-173a-4550-9d02-20afffc79b12",
-      },
-      {
-        color: "Blue",
-        colorCode: " #0000FF",
-        image:
-          "https://firebasestorage.googleapis.com/v0/b/e-shop-vid.appspot.com/o/products%2Fiphone%2012%20blue.png?alt=media&token=ede757d2-b631-4451-b80c-123861f16c92",
-      },
-      {
-        color: "Red",
-        colorCode: "#FF0000",
-        image:
-          "https://firebasestorage.googleapis.com/v0/b/e-shop-vid.appspot.com/o/products%2Fiphone%2012%20red.png?alt=media&token=945e1ffb-953e-467a-8325-5a8fbbbf3153",
+        color: "Silver",
+        colorCode: "#C0C0C0",
+        image: "https://mobileshop.ug/api/uploads/1687266414179-12A.webp",
       },
     ],
     reviews: [
       {
         id: "6499b4887402b0efd394d8f3",
         userId: "6499b184b0e9a8c8709821d3",
-        productId: "648437b38c44d52b9542e340",
+        productId: "64b2d8e4f1g2h3i4j5k6l789",
         rating: 4,
         comment:
           "good enough. I like the camera and casing. the delivery was fast too.",
@@ -117,7 +107,7 @@ export const products = [
       {
         id: "6499a110efe4e4de451c7edc",
         userId: "6475af156bad4917456e6e1e",
-        productId: "648437b38c44d52b9542e340",
+        productId: "64b2d8e4f1g2h3i4j5k6l789",
         rating: 5,
         comment: "I really liked it!!",
         createdDate: "2023-06-26T14:30:40.998Z",
@@ -137,45 +127,48 @@ export const products = [
     ],
   },
   {
-    id: "64a4e9e77e7299078334019f",
-    name: "Logitech MX Master 2S Wireless Mouse – Use on Any Surface, Hyper-Fast Scrolling, Ergonomic Shape, Rechargeable, Control Upto 3 Apple Mac and Windows Computers, Graphite",
+    id: "65a4b3c2d1e2f3g4h5i6j7k8",
+    name: "Apple Watch Series ",
     description:
-      "Cross computer control: Game changing capacity to navigate seamlessly on 3 computers, and copy paste text, images, and files from 1 to the other using Logitech flow\nDual connectivity: Use with upto 3 Windows or Mac computers via included Unifying receiver or Bluetooth Smart wireless technology. Gesture button- Yes",
-    price: 70,
-    brand: "logitech",
-    category: "Accesories",
+      "The largest, most advanced display yet. Most durable Apple Watch ever. Breakthrough health innovations.",
+    price: 50,
+    brand: "Apple",
+    category: "Watch",
     inStock: true,
     images: [
       {
-        color: "Graphite",
-        colorCode: " #383838",
+        color: "Midnight",
+        colorCode: "#4B0082",
         image:
-          "https://firebasestorage.googleapis.com/v0/b/e-shop-vid.appspot.com/o/products%2Flogitech-graphite.png?alt=media&token=d07334d8-ab2b-4648-a38b-2a062a1a49bc",
+          "https://mobileshop.ug/api/uploads/1648450850768-71S6CQmCTsL._AC_SX425.webp",
+      },
+      {
+        color: "Starlight",
+        colorCode: "#FFD700",
+        image:
+          "https://mobileshop.ug/api/uploads/1704812030864-818t572-n1L._AC_SL1500_.jpg",
       },
     ],
     reviews: [],
   },
   {
-    id: "649d775128b6744f0f497040",
-    name: 'Smart Watch(Answer/Make Call), 1.85" Smartwatch for Men Women IP68 Waterproof, 100+ Sport Modes, Fitness Activity Tracker, Heart Rate Sleep Monitor, Pedometer, Smart Watches for Android iOS, 2023',
-    description:
-      'Bluetooth Call and Message Reminder: The smart watch is equipped with HD speaker, after connecting to your phone via Bluetooth, you can directly use the smartwatches to answer or make calls, read messages, store contacts, view call history. The smartwatch can set up more message notifications in "GloryFit" APP. You will never miss any calls and messages during meetings, workout and riding.',
-    price: 50,
-    brand: "Nerunsa",
-    category: "Watch",
+    id: "76c4b3d2e1f4g5h6i7j8k9l0",
+    name: "Google Pixel 6",
+    description: "The all-new Google Pixel 6, designed the Google way.",
+    price: 599,
+    brand: "Google",
+    category: "Phone",
     inStock: true,
     images: [
       {
-        color: "Black",
-        colorCode: "#000000",
-        image:
-          "https://firebasestorage.googleapis.com/v0/b/e-shop-vid.appspot.com/o/products%2F1695192445608-watch-black.jpg?alt=media&token=4446b901-01ab-4152-8953-e36b22608755",
+        color: "Sorta Seafoam",
+        colorCode: "#2E8B57",
+        image: "https://mobileshop.ug/api/uploads/1681824064426-6PRO3.webp",
       },
       {
-        color: "Silver",
-        colorCode: "#C0C0C0",
-        image:
-          "https://firebasestorage.googleapis.com/v0/b/e-shop-vid.appspot.com/o/products%2F1695192448311-watch-silver.jpg?alt=media&token=a76bec63-f616-4647-9dd3-b3d23407ba4f",
+        color: "Kinda Coral",
+        colorCode: "#FF7F50",
+        image: "https://mobileshop.ug/api/uploads/1682496253466-6CC.webp",
       },
     ],
     reviews: [],

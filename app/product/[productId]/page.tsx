@@ -5,11 +5,11 @@ import ListRating from "./ListRating";
 import { products } from "@/utils/products";
 
 interface IParms {
-  productID?: string;
+  productId?: string;
 }
+
 const Product = ({ params }: { params: IParms }) => {
-  const product = products.find((item) => item.id === params.productID);
-  console.log(params, "[productId]");
+  const product = products.find((item) => item.id === params.productId);
 
   return (
     <>
