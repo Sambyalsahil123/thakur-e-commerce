@@ -45,6 +45,7 @@ model Order {
     userId          String?           @db.ObjectId
     amount          Float
     currency        String
+    description     String
     status          String
     deliveryStatus  String?
     createDate      DateTime          @default(now())

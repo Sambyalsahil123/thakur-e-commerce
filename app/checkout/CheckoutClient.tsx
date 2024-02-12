@@ -1,18 +1,25 @@
 "use client";
 
 import { useCart } from "@/hooks/useCart";
+import { Elements } from "@stripe/react-stripe-js";
+import { StripeElementsOptions, loadStripe } from "@stripe/stripe-js";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import CheckoutForm from "./CheckoutForm";
+import Button from "../components/Button";
+
+const stripePromise = loadStripe(
+  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY as string
+);
 
 const CheckoutClient = () => {
   const { cartProducts, paymentIntent, handleSetPaymentIntent } = useCart();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [clientSecret, setClientSecret] = useState("");
+  const [paymentSuccess, setPaymentSuccess] = useState(false);
   const router = useRouter();
-  console.log(paymentIntent, "paymentIntent");
-  console.log(clientSecret, "client secret");
 
   useEffect(() => {
     if (cartProducts) {
@@ -35,8 +42,8 @@ const CheckoutClient = () => {
         })
         .then((data) => {
           console.log(data, "this is DATA");
-          setClientSecret(data.paymentIntent.client_secret);
-          handleSetPaymentIntent(data.paymentIntent.id);
+          setClientSecret(data?.paymentIntent?.client_secret);
+          handleSetPaymentIntent(data?.paymentIntent?.id);
         })
         .catch((err) => {
           setError(true);
@@ -45,8 +52,42 @@ const CheckoutClient = () => {
         });
     }
   }, [cartProducts, handleSetPaymentIntent, paymentIntent, router]);
+  const options: StripeElementsOptions = {
+    clientSecret,
+    appearance: {
+      theme: "stripe",
+      labels: "floating",
+    },
+  };
+  const handlePaymentSuccess = useCallback((value: boolean) => {
+    setPaymentSuccess(value);
+  }, []);
+  return (
+    <div className="w-full">
+      {clientSecret && cartProducts && (
+        <Elements options={options} stripe={stripePromise}>
+          <CheckoutForm
+            clientSecret={clientSecret}
+            handleSetPaymentSuccess={handlePaymentSuccess}
+          />
+        </Elements>
+      )}
 
-  return <>CHECKOUT{clientSecret}</>;
+      {loading && <div className="text-center">Loading Checkout</div>}
+      {error && <div className="text-center">Something went wrong...</div>}
+      {paymentSuccess && (
+        <div className="flex items-center flex-col gap-4">
+          <div className="text-teal-500 text-center">Payment Success</div>
+          <div className="max-w-[220px] w-full">
+            <Button
+              label="view your Orders"
+              onClick={() => router.push("/order")}
+            />
+          </div>
+        </div>
+      )}
+    </div>
+  );
 };
 
 export default CheckoutClient;

@@ -61,7 +61,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
         setIsProductInCart(true);
       }
     }
-  }, [cartProducts]);
+  }, [cartProducts, product?.id]);
 
   const productRating =
     product?.reviews.reduce((acc: number, item: any) => item.rating + acc, 0) /

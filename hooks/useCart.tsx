@@ -12,14 +12,14 @@ type CartContextType = {
   loading: boolean;
   cartTotalQty: number;
   cartTotalAmount: number;
+  paymentIntent: string | null;
   cartProducts: CartProductType[] | null;
-  handleAddProductToCart: (product: CartProductType) => void;
   handleRemoveProductFromCart: (product: CartProductType) => void;
+  handleAddProductToCart: (product: CartProductType) => void;
   handleQtyIncrease: (product: CartProductType) => void;
   handleQtyDecrease: (product: CartProductType) => void;
-  handleClearCart: () => void;
-  paymentIntent: string | null;
   handleSetPaymentIntent: (val: string | null) => void;
+  handleClearCart: () => void;
 };
 
 // CartContext
