@@ -24,6 +24,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
   const body = await request.json();
+
   const { items, payment_intent_id } = body;
   const total = calculateOrderAmount(items) * 100;
 

@@ -35,15 +35,20 @@ const CheckoutClient = () => {
       })
         .then((response) => {
           setLoading(false);
+          if (!response.ok) {
+            throw new Error("Failed to fetch data");
+          }
           if (response.status === 401) {
             return router.push("/login");
           }
           return response.json();
         })
         .then((data) => {
-          console.log(data, "this is DATA");
-          setClientSecret(data?.paymentIntent?.client_secret);
-          handleSetPaymentIntent(data?.paymentIntent?.id);
+          if (!data || !data.paymentIntent || !data.paymentIntent.id) {
+            throw new Error("Invalid data received");
+          }
+          setClientSecret(data.paymentIntent.client_secret);
+          handleSetPaymentIntent(data.paymentIntent.id);
         })
         .catch((err) => {
           setError(true);
@@ -51,7 +56,8 @@ const CheckoutClient = () => {
           toast.error("Something went wrong.");
         });
     }
-  }, [cartProducts, handleSetPaymentIntent, paymentIntent, router]);
+  }, [cartProducts, paymentIntent]);
+
   const options: StripeElementsOptions = {
     clientSecret,
     appearance: {

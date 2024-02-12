@@ -4,6 +4,7 @@ import {
   useCallback,
   useContext,
   useEffect,
+  useMemo,
   useState,
 } from "react";
 import { toast } from "react-hot-toast";
@@ -39,13 +40,22 @@ export const CartContextProvider = (props: Props) => {
   );
 
   useEffect(() => {
-    const cartItems: any = localStorage.getItem("eShopCartItems");
-    const underCartProduct: CartProductType[] | null = JSON.parse(cartItems);
-    const eShopPaymentIntent: any = localStorage.getItem("eShopPaymentIntent");
-    const paymentIntent: string | null = JSON.parse(eShopPaymentIntent);
-    setCartProducts(underCartProduct);
-    setPaymentIntent(paymentIntent);
+    try {
+      const cartItems = localStorage.getItem("eShopCartItems");
+      const underCartProduct: CartProductType[] = JSON.parse(cartItems || "[]");
+      const eShopPaymentIntent: any =
+        localStorage.getItem("eShopPaymentIntent");
+      const paymentIntent: string | null = JSON.parse(
+        eShopPaymentIntent ?? "null"
+      );
+      setCartProducts(underCartProduct);
+
+      setPaymentIntent(paymentIntent);
+    } catch (error) {
+      console.error("Error parsing local storage items:", error);
+    }
   }, []);
+
   useEffect(() => {
     const getTotals = () => {
       if (cartProducts) {
@@ -104,6 +114,10 @@ export const CartContextProvider = (props: Props) => {
       }
 
       if (!cartProducts) return;
+      if (product.quantity >= 20) {
+        toast.error("Oops, quantity exceeds");
+        return;
+      }
 
       const updatedCart = cartProducts.map((item) =>
         item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
@@ -140,30 +154,51 @@ export const CartContextProvider = (props: Props) => {
   const handleClearCart = useCallback(() => {
     setCartProducts(null);
     setCartTotalQty(0);
-    localStorage.setItem("eShopCartItems", JSON.stringify(null));
+    localStorage.setItem("eShopCartItems", JSON.stringify([]));
   }, [cartProducts]);
 
   const handleSetPaymentIntent = useCallback(
     (val: string | null) => {
       setPaymentIntent(val);
+
       localStorage.setItem("eShopPaymentIntent", JSON.stringify(val));
+      const eShopPaymentIntent = localStorage.getItem("eShopPaymentIntent");
+      const paymentIntent: string | null = JSON.parse(
+        eShopPaymentIntent ?? "null"
+      );
     },
     [paymentIntent]
   );
 
-  const value = {
-    loading,
-    cartTotalQty,
-    cartTotalAmount,
-    cartProducts,
-    handleAddProductToCart,
-    handleRemoveProductFromCart,
-    handleQtyIncrease,
-    handleQtyDecrease,
-    handleClearCart,
-    handleSetPaymentIntent,
-    paymentIntent,
-  };
+  const value = useMemo(
+    () => ({
+      loading,
+      cartTotalQty,
+      cartTotalAmount,
+      cartProducts,
+      handleAddProductToCart,
+      handleRemoveProductFromCart,
+      handleQtyIncrease,
+      handleQtyDecrease,
+      handleClearCart,
+      handleSetPaymentIntent,
+      paymentIntent,
+    }),
+    [
+      loading,
+      cartTotalQty,
+      cartTotalAmount,
+      cartProducts,
+      handleAddProductToCart,
+      handleRemoveProductFromCart,
+      handleQtyIncrease,
+      handleQtyDecrease,
+      handleClearCart,
+      handleSetPaymentIntent,
+      paymentIntent,
+    ]
+  );
+
   return <CartContext.Provider value={value} {...props} />;
 };
 
@@ -171,7 +206,7 @@ export const CartContextProvider = (props: Props) => {
 export const useCart = () => {
   const context = useContext(CartContext);
   if (context === null) {
-    throw new Error("useCar must be used within a CartContextProvider");
+    throw new Error("useCart must be used within a CartContextProvider");
   }
 
   return context;
