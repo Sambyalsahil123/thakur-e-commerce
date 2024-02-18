@@ -64,7 +64,6 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({
       .catch((err) => {
         console.log(err, "this is errr");
         toast.error("Error occurred");
-
         setIsLoading(false);
       })
       .finally(() => {
