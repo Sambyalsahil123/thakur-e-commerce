@@ -22,7 +22,7 @@ const CheckoutClient = () => {
   const router = useRouter();
 
   useEffect(() => {
-    if (cartProducts) {
+    if (cartProducts && !paymentIntent) {
       setLoading(true);
       setError(false);
       fetch("/api/create-payment-intent", {
@@ -52,6 +52,7 @@ const CheckoutClient = () => {
         })
         .catch((err) => {
           setError(true);
+          setLoading(false);
           console.error("Fetch error:", err);
           toast.error("Something went wrong.");
         });
@@ -87,7 +88,7 @@ const CheckoutClient = () => {
           <div className="max-w-[220px] w-full">
             <Button
               label="view your Orders"
-              onClick={() => router.push("/order")}
+              onClick={() => router.push("/orders")}
             />
           </div>
         </div>

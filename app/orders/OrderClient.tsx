@@ -18,17 +18,15 @@ import moment from "moment";
 import { formatPrice } from "@/utils/formatPrice";
 import { Order, User } from "@prisma/client";
 
-interface ManageOrdersClientProps {
+interface OrdersClientProps {
   orders: ExtendedOrder[];
 }
 type ExtendedOrder = Order & {
   user: User;
 };
-const ManageOrdersClient: React.FC<ManageOrdersClientProps> = ({ orders }) => {
+const OrderClient: React.FC<OrdersClientProps> = ({ orders }) => {
   const router = useRouter();
-
   let rows: any = [];
-
   if (orders) {
     rows = orders.map((order) => {
       return {
@@ -130,18 +128,6 @@ const ManageOrdersClient: React.FC<ManageOrdersClientProps> = ({ orders }) => {
         return (
           <div className="flex justify-between gap-4 w-full ">
             <ActionBtn
-              icon={MdDeliveryDining}
-              onClick={() => {
-                handleDispatch(params.row.id);
-              }}
-            />
-            <ActionBtn
-              icon={MdDone}
-              onClick={() => {
-                handleDeliver(params.row.id);
-              }}
-            />
-            <ActionBtn
               icon={MdRemoveRedEye}
               onClick={() => {
                 router.push(`/order/${params.row.id}`);
@@ -152,39 +138,6 @@ const ManageOrdersClient: React.FC<ManageOrdersClientProps> = ({ orders }) => {
       },
     },
   ];
-  const handleDispatch = useCallback((id: string) => {
-    axios
-      .put("/api/order", {
-        id,
-        deliveryStatus: "dispatched",
-      })
-      .then((res) => {
-        console.log(res);
-
-        toast.success("Order Dispatched");
-        router.refresh();
-      })
-      .catch((error) => {
-        toast.success("Oops Something went wrong ");
-        console.log(error, "this is error");
-      });
-  }, []);
-
-  const handleDeliver = useCallback((id: string) => {
-    axios
-      .put("/api/order", {
-        id,
-        deliveryStatus: "delivered",
-      })
-      .then((res) => {
-        toast.success("Order Delivered");
-        router.refresh();
-      })
-      .catch((error) => {
-        toast.success("Oops Something went wrong ");
-        console.log(error, "this is error");
-      });
-  }, []);
 
   return (
     <div className="m-auto text-xl max-w-[1150px]">
@@ -208,4 +161,4 @@ const ManageOrdersClient: React.FC<ManageOrdersClientProps> = ({ orders }) => {
   );
 };
 
-export default ManageOrdersClient;
+export default OrderClient;

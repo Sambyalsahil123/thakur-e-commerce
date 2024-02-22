@@ -45,9 +45,7 @@ export const CartContextProvider = (props: Props) => {
       const underCartProduct: CartProductType[] = JSON.parse(cartItems || "[]");
       const eShopPaymentIntent: any =
         localStorage.getItem("eShopPaymentIntent");
-      const paymentIntent: string | null = JSON.parse(
-        eShopPaymentIntent ?? "null"
-      );
+      const paymentIntent: string | null = JSON.parse(eShopPaymentIntent);
       setCartProducts(underCartProduct);
 
       setPaymentIntent(paymentIntent);
@@ -160,12 +158,7 @@ export const CartContextProvider = (props: Props) => {
   const handleSetPaymentIntent = useCallback(
     (val: string | null) => {
       setPaymentIntent(val);
-
       localStorage.setItem("eShopPaymentIntent", JSON.stringify(val));
-      const eShopPaymentIntent = localStorage.getItem("eShopPaymentIntent");
-      const paymentIntent: string | null = JSON.parse(
-        eShopPaymentIntent ?? "null"
-      );
     },
     [paymentIntent]
   );

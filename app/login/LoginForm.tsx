@@ -16,6 +16,7 @@ interface LoginFormProps {
 }
 const LoginForm: React.FC<LoginFormProps> = ({ currentUser }) => {
   const router = useRouter();
+  const [isGoogleLoading, setIsGoogleLoading] = useState(false);
 
   const [isLoading, setIsLoading] = useState(false);
   const {
@@ -60,12 +61,24 @@ const LoginForm: React.FC<LoginFormProps> = ({ currentUser }) => {
       <Heading title="Sign in to E-shop " />
       <Button
         outline
-        label="Continue with Google"
+        label={isGoogleLoading ? "Loading..." : "Continue with Google"}
         icon={AiOutlineGoogle}
         onClick={() => {
-          signIn("google");
+          setIsGoogleLoading(true); // Set loading to true
+          signIn("google")
+            .then((result) => {
+              // Handle success if needed, e.g., redirect based on result.url
+            })
+            .catch((error) => {
+              // Optionally handle error, e.g., show a toast notification
+              toast.error("An error occurred.");
+            })
+            .finally(() => {
+              setIsGoogleLoading(false); // Reset loading state
+            });
         }}
       />
+
       <hr className="bg-slate-300 w-full h-px" />
 
       <Input

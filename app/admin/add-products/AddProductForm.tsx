@@ -162,7 +162,7 @@ const AddProductForm = () => {
       .then(() => {
         toast.success("Product Created");
         setIsProductCreated(true);
-        router.refresh();
+        router.push("/admin/manage-products");
       })
       .catch((err) => {
         toast.error("Something went wrong");
