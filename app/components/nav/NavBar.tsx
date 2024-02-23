@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import Container from "../Container";
 import Link from "next/link";
 import { Redressed } from "next/font/google";
@@ -39,7 +39,9 @@ const NavBar = async () => {
           </div>
         </Container>
       </div>
-      <Categories />
+      <Suspense fallback={<>Loading...</>}>
+        <Categories />
+      </Suspense>
     </div>
   );
 };

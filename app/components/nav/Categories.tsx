@@ -1,7 +1,7 @@
 "use client";
 
 import { categories } from "@/utils/Categories";
-import React from "react";
+import React, { Suspense } from "react";
 import Container from "../Container";
 import Category from "./Category";
 import { usePathname, useSearchParams } from "next/navigation";
@@ -18,15 +18,19 @@ const Categories = () => {
       <Container>
         <div className="pt-4 flex flex-row items-center justify-between overflow-x-auto ">
           {categories.map((item) => (
-            <Category
-              key={item.label}
-              label={item.label}
-              icon={item.icon}
-              selected={
-                category === item.label ||
-                (category === null && item.label === "All")
-              }
-            />
+            <>
+              <Suspense fallback={<>Loading...</>}>
+                <Category
+                  key={item.label}
+                  label={item.label}
+                  icon={item.icon}
+                  selected={
+                    category === item.label ||
+                    (category === null && item.label === "All")
+                  }
+                />
+              </Suspense>
+            </>
           ))}
         </div>
       </Container>
