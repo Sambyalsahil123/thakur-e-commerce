@@ -22,8 +22,9 @@ interface ManageOrdersClientProps {
   orders: ExtendedOrder[];
 }
 type ExtendedOrder = Order & {
-  user: User;
+  user: User | null;
 };
+
 const ManageOrdersClient: React.FC<ManageOrdersClientProps> = ({ orders }) => {
   const router = useRouter();
 
@@ -33,7 +34,7 @@ const ManageOrdersClient: React.FC<ManageOrdersClientProps> = ({ orders }) => {
     rows = orders.map((order) => {
       return {
         id: order.id,
-        customer: order.user.name,
+        customer: order.user ? order.user.name : "Unknown User",
         amount: formatPrice(order.amount / 100),
         paymentStatus: order.status,
         date: moment(order.createDate).fromNow(),
