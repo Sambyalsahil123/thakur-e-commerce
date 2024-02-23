@@ -8,6 +8,7 @@ import UserMenu from "./UserMenu";
 import { getCurrentUser } from "@/actions/getCurrentUser";
 import Categories from "./Categories";
 import SearchBar from "./SearchBar";
+
 const redressed = Redressed({ subsets: ["latin"], weight: ["400"] });
 
 const NavBar = async () => {
@@ -15,7 +16,7 @@ const NavBar = async () => {
 
   return (
     <div
-      className={`sticky top-0 w-full bg-slate-200 z-30 shadow-sm transition-transform duration-300 `}
+      className={`sticky top-0 w-full bg-slate-300 z-30 shadow-sm transition-transform duration-300 `}
     >
       <div className="py-4 border-b-[1px]">
         <Container>
@@ -26,7 +27,7 @@ const NavBar = async () => {
             >
               <div className="flex text-center justify-center items-center">
                 <Image alt="logo" src="/logo2.png" height={10} width={50} />
-                Thakur E-Kart
+                Thakur Ekart
               </div>
             </Link>
             <div className="hidden md:block">
