@@ -10,9 +10,6 @@ import {
   MdRemoveRedEye,
 } from "react-icons/md";
 import ActionBtn from "@/app/components/ActionBtn";
-import { useCallback } from "react";
-import axios from "axios";
-import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import moment from "moment";
 import { formatPrice } from "@/utils/formatPrice";
@@ -22,7 +19,7 @@ interface OrdersClientProps {
   orders: ExtendedOrder[];
 }
 type ExtendedOrder = Order & {
-  user: User;
+  user: User | null;
 };
 const OrderClient: React.FC<OrdersClientProps> = ({ orders }) => {
   const router = useRouter();
@@ -31,7 +28,7 @@ const OrderClient: React.FC<OrdersClientProps> = ({ orders }) => {
     rows = orders.map((order) => {
       return {
         id: order.id,
-        customer: order.user.name,
+        customer: order.user ? order.user.name : "Unknown User",
         amount: formatPrice(order.amount / 100),
         paymentStatus: order.status,
         date: moment(order.createDate).fromNow(),
