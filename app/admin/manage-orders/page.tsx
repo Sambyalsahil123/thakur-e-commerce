@@ -1,5 +1,5 @@
 import Container from "@/app/components/Container";
-import React from "react";
+import React, { Suspense } from "react";
 import { getCurrentUser } from "@/actions/getCurrentUser";
 import NullData from "@/app/components/NullData";
 import ManageOrdersClient from "./ManageOrdersClient";
@@ -14,7 +14,9 @@ const ManageOrders = async () => {
   return (
     <div className="pt-8">
       <Container>
-        <ManageOrdersClient orders={orders} />
+        <Suspense fallback={<div>Loading...</div>}>
+          <ManageOrdersClient orders={orders} />
+        </Suspense>
       </Container>
     </div>
   );

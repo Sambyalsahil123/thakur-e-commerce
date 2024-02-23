@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import AdminNav from "../components/admin/AdminNav";
 
 export const metadata = {
@@ -8,7 +9,7 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div>
       <AdminNav />
-      {children}
+      <Suspense fallback={<>Loading...</>}>{children}</Suspense>
     </div>
   );
 };

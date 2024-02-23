@@ -1,5 +1,5 @@
 import Container from "@/app/components/Container";
-import React from "react";
+import React, { Suspense } from "react";
 import ManageProductClient from "./ManageProductClient";
 import getProducts from "@/actions/getProducts";
 import { getCurrentUser } from "@/actions/getCurrentUser";
@@ -14,7 +14,9 @@ const ManageProducts = async () => {
   return (
     <div className="pt-8">
       <Container>
-        <ManageProductClient products={products} />
+        <Suspense fallback={<div>Loading...</div>}>
+          <ManageProductClient products={products} />
+        </Suspense>
       </Container>
     </div>
   );
