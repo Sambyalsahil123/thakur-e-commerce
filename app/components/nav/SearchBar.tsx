@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import queryString from "query-string";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import { FaSearch } from "react-icons/fa";
 
 const SearchBar = () => {
   const router = useRouter();
@@ -34,18 +35,19 @@ const SearchBar = () => {
   };
 
   return (
-    <div className="flex items-center">
+    <div className="flex items-center w-full">
       <input
         {...register("searchTerm")}
         placeholder="Explore Thakur-Shop"
         type="text"
-        className="p-2 border-gray-300 rounded-1-md focus:outline-none focus:border-[0.5px] focus:border-slate-500 w-80"
+        className="p-2 border-gray-300 rounded-l-md focus:outline-none focus:border-[0.5px] focus:border-slate-500 flex-grow"
       />
       <button
         onClick={handleSubmit(onSubmit)}
-        className="bg-slate-700 hover:opacity-80 text-white p-2 rounded-r-md"
+        className="bg-slate-700 hover:opacity-80 text-white p-2 rounded-r-md flex items-center justify-center gap-2"
       >
-        Search
+        <FaSearch size={20} />
+        <span className="hidden sm:inline">Search</span>
       </button>
     </div>
   );

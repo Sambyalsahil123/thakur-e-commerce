@@ -20,20 +20,20 @@ const NavBar = async () => {
     >
       <div className="py-4 border-b-[1px]">
         <Container>
-          <div className="flex items-center justify-between gap-3 md-gap-0">
+          <div className="flex items-center justify-between gap-1 md-gap-0">
             <Link
               className={`${redressed.className} font-bold text-2xl`}
               href="/"
             >
               <div className="flex text-center justify-center items-center">
                 <Image alt="logo" src="/logo2.png" height={10} width={50} />
-                Thakur Ekart
+                <span className="hidden md:block">Thakur Ekart</span>
               </div>
             </Link>
-            <div className="hidden md:block">
+            <div>
               <SearchBar />
             </div>
-            <div className="flex items-center gap-8 md:gap-12">
+            <div className="flex items-center gap-0 md:gap-12">
               <CartCount />
               <UserMenu currentUser={currentUser} />
             </div>
