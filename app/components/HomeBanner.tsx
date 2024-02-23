@@ -48,8 +48,9 @@ const HomeBanner = () => {
             Enjoy a discount on selected items
           </p>
           <p className={`text-2xl md:text-5xl font-bold ${textColor}`}>
-            GET 50% OFF BY USING COUPON CODE 'THAKUR'
+            GET 50% OFF BY USING COUPON CODE &apos;THAKUR&apos;
           </p>
+
           <button
             className="mt-4 px-6 py-2 bg-white text-black rounded hover:bg-gray-100 transition"
             onClick={changeColors}
