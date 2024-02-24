@@ -35,12 +35,12 @@ const SearchBar = () => {
   };
 
   return (
-    <div className="flex items-center w-full">
+    <div className="flex items-center">
       <input
         {...register("searchTerm")}
         placeholder="Explore Thakur-Shop"
         type="text"
-        className="p-2 border-gray-300 rounded-l-md focus:outline-none focus:border-[0.5px] focus:border-slate-500 flex-grow"
+        className="p-2 border-gray-300 rounded-1-md focus:outline-none focus:border-[0.5px] focus:border-slate-500 w-80"
       />
       <button
         onClick={handleSubmit(onSubmit)}

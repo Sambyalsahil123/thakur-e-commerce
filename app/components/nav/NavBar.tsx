@@ -8,7 +8,6 @@ import UserMenu from "./UserMenu";
 import { getCurrentUser } from "@/actions/getCurrentUser";
 import Categories from "./Categories";
 import SearchBar from "./SearchBar";
-
 const redressed = Redressed({ subsets: ["latin"], weight: ["400"] });
 
 const NavBar = async () => {
@@ -30,10 +29,10 @@ const NavBar = async () => {
                 <span className="hidden md:block">Thakur Ekart</span>
               </div>
             </Link>
-            <div>
+            <div className="hidden md:block">
               <SearchBar />
             </div>
-            <div className="flex items-center gap-0 md:gap-12">
+            <div className="flex items-center gap-8 md:gap-12">
               <CartCount />
               <UserMenu currentUser={currentUser} />
             </div>
