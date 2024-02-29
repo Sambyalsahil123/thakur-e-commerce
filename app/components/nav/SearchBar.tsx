@@ -44,7 +44,7 @@ const SearchBar = () => {
       />
       <button
         onClick={handleSubmit(onSubmit)}
-        className="bg-slate-700 hover:opacity-80 text-white p-2 rounded-r-md flex items-center justify-center gap-2"
+        className="bg-slate-700 hover:opacity-80 text-white p-2 rounded-r-md"
       >
         <FaSearch size={20} />
         <span className="hidden sm:inline">Search</span>
