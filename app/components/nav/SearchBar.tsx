@@ -46,8 +46,7 @@ const SearchBar = () => {
         onClick={handleSubmit(onSubmit)}
         className="bg-slate-700 hover:opacity-80 text-white p-2 rounded-r-md"
       >
-        <FaSearch size={20} />
-        <span className="hidden sm:inline">Search</span>
+        <FaSearch size={21} />
       </button>
     </div>
   );
